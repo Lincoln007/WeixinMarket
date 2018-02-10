@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/css/zui.min.css" rel="stylesheet" />
+    <link href="~/css/admin.css" rel="stylesheet" />
+    <script src="http://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="~/js/zui.min.js"></script>
+</head>
+<body>
+    @Html.Partial("~/Views/Shared/_header.cshtml")
+    <div class="row">
+        @*菜单区域开始*@
+        <div class="col-md-2">
+            <nav class="menu" data-toggle="menu" style="width: 200px">
+                <ul class="nav nav-primary">
+                    <li class="nav-parent">
+                        <a href="javascript:;" data-toggle="collapse" data-target="#childMenu1"><i class="icon icon-time"></i>配置管理</a>
+                        <ul class="collapse nav" id="childMenu1">
+                            <li><a href="javascript:;">公众号配置</a></li>
+                            <li><a href="javascript:;">菜单配置</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav nav-primary">
+                    <li class="nav-parent">
+                        <a href="javascript:;" data-toggle="collapse" data-target="#childMenu2"><i class="icon icon-time"></i>配置管理</a>
+                        <ul class="collapse nav" id="childMenu2">
+                            <li><a href="javascript:;">公众号配置</a></li>
+                            <li><a href="javascript:;">菜单配置</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <script>
+            $('.menu .nav').on('click', 'li:not(.nav-parent) > a', function () {
+                var $this = $(this);
+                $('.menu .nav .active').removeClass('active');
+                $this.closest('li').addClass('active');
+                $this.closest('.nav-parent').addClass('active');
+            });
+        </script>
+        @*菜单区域结束*@
+        <div class="col-md-10">
+            @RenderBody()
+        </div>
+    </div>
+    @Html.Partial("~/Views/Shared/_footer.cshtml")
+</body>
+</html>

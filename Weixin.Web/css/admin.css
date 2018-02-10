@@ -1,0 +1,40 @@
+﻿.header {
+	position: relative;
+	width: 100%;
+	height: 70px;
+	background-color: #5f9ea0
+}
+
+.logo {
+	float: left;
+	margin-left: 10px;
+	width: 80%;
+	height: auto;
+	font: large Arial;
+	line-height: 70px
+}
+
+.logo,.user {
+	color: #fff
+}
+
+.logout,.user {
+	float: right;
+	margin-right: 10px;
+	width: auto;
+	height: auto;
+	line-height: 70px
+}
+
+.logout a {
+	color: #fff;
+	text-decoration: none
+}
+
+.pagebar {width:100%;position:relative;}
+
+.pagebar ul {margin-right:10px;float:right;}
+
+.searchBar {width:100%;}
+
+.searchBar div.btn-group {margin-right:10px;}

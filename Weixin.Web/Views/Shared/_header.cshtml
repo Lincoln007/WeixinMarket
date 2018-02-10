@@ -1,0 +1,23 @@
+﻿@{
+    var username = HttpContext.Current.User.Identity.Name;
+}
+<div class="header">
+    <span class="logo"><a href="/Data/Index" target="_blank">北辰公众号管理系统</a></span>
+    @if (string.IsNullOrEmpty(username))
+    {
+        <span class="user">
+            <a href="/Account/LogIn">登录</a>
+        </span>
+    }
+    else
+    {
+        <span class="logout">
+            <img src="~/picture/logout.png" />
+            <a href="/Account/Logout">注销</a>
+        </span>
+        <span class="user">
+            <img src="~/picture/user.png" />
+            @username
+        </span>
+    }
+</div>

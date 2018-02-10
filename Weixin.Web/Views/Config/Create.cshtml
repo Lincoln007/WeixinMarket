@@ -1,0 +1,65 @@
+﻿@model Weixin.Web.Models.BaseConfigCreateModel
+
+@{
+    ViewBag.Title = "新增公众号配置";
+    Layout = "~/Views/Shared/_MainLayoutPage.cshtml";
+}
+
+<h2>新增公众号配置</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <form class="form-horizontal">
+        <hr />
+        <div class="form-group col-md-7">
+            <div class="input-control has-icon-left">
+                <input name="WeixinName" type="text" class="form-control" placeholder="公众号名称">
+                <label class="input-control-icon-left"><i class="icon icon-wechat "></i></label>
+            </div>
+        </div>
+
+        <div class="form-group col-md-7">
+            <div class="input-control has-icon-left">
+                <input name="Appid" type="text" class="form-control" placeholder="Appid">
+                <label class="input-control-icon-left"><i class="icon icon-android "></i></label>
+            </div>
+        </div>
+
+        <div class="form-group col-md-7">
+            <div class="input-control has-icon-left">
+                <input name="Token" type="text" class="form-control" placeholder="Token">
+                <label class="input-control-icon-left"><i class="icon icon-unlock-alt"></i></label>
+            </div>
+        </div>
+
+        <div class="form-group col-md-7">
+            <div class="input-control has-icon-left">
+                <input name="EncodingAESKey" type="text" class="form-control" placeholder="EncodingAESKey">
+                <label class="input-control-icon-left"><i class="icon icon-key"></i></label>
+            </div>
+        </div>
+
+        <div class="form-group col-md-7">
+            <div class="input-control has-icon-left">
+                <input name="Appsecret" type="text" class="form-control" placeholder="Appsecret">
+                <label class="input-control-icon-left"><i class="icon icon-key"></i></label>
+            </div>
+        </div>
+
+        <div class="form-group col-md-7">
+            <div class="input-control has-icon-left">
+                <input name="DefaultResponse" type="text" class="form-control" placeholder="默认消息">
+                <label class="input-control-icon-left"><i class="icon icon-comments"></i></label>
+            </div>
+        </div>
+
+        <div class="form-group col-md-7">
+            <div class="col-md-offset-10 col-md-4">
+                <input type="submit" value="新增" class="btn btn-success" />
+            </div>
+        </div>
+    </form>
+
+}

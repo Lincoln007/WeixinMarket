@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Weixin.DTO.BaseConfigDTO>
+
+@{
+    ViewBag.Title = "Base";
+    Layout = "~/Views/Shared/_MainLayoutPage.cshtml";
+}
+<hr />
+<p>
+    <a href="/Config/Create" class="btn btn-success">新增</a>
+</p>
+<table class="table table-hover table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.WeixinName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Appid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Token)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EncodingAESKey)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Appsecret)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DefaultResponse)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.WeixinName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Appid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Token)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EncodingAESKey)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Appsecret)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DefaultResponse)
+            </td>
+            <td>
+                <a href="/Config/Edit/@item.Id" class="btn btn-primary">编辑</a>
+                <a href="/Config/Delete/@item.Id" class="btn btn-danger">删除</a>
+            </td>
+        </tr>
+}
+    </tbody>
+
+
+
+</table>
