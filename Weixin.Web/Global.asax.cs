@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Weixin.Iserivce;
+using Weixin.Service;
 
 namespace Weixin.Web
 {
@@ -28,6 +29,15 @@ namespace Weixin.Web
 
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            Senparc.Weixin.Threads.ThreadUtility.Register();
+            var baseConfigService = new BaseConfigService();
+            var task = baseConfigService.GetAll();
+            var configs = task.Result;
+            foreach (var config in configs)
+            {
+                Senparc.Weixin.MP.Containers.AccessTokenContainer.Register(config.Appid, config.Appsecret, config.WeixinName);
+            }
         }
     }
 }

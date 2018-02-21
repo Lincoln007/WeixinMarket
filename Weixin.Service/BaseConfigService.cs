@@ -96,9 +96,24 @@ namespace Weixin.Service
             }
         }
 
-        public Task Edit()
+        public async Task Edit(long id,string WeixinName, string Token, string EncodingAESKey, string Appsecret,
+            string DefaultResponse)
         {
-            throw new NotImplementedException();
+            using (var db = new WeixinDbContext())
+            {
+                var commonService = new CommonService<BaseConfig>(db);
+                var config = await commonService.GetById(id);
+                if (config==null)
+                {
+                    throw new ArgumentNullException();
+                }
+                config.WeixinName = WeixinName;
+                config.Token = Token;
+                config.EncodingAESKey = EncodingAESKey;
+                config.Appsecret = Appsecret;
+                config.DefaultResponse = DefaultResponse;
+                await db.SaveChangesAsync();
+            }
         }
 
         public async Task<int> GetByAppid(string appid)
@@ -107,10 +122,6 @@ namespace Weixin.Service
             {
                 return await db.BaseConfig.CountAsync(b => b.Appid == appid);
             }
-        }
-        public Task Create()
-        {
-            throw new NotImplementedException();
         }
     }
 }

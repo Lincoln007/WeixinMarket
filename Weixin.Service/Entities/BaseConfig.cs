@@ -8,11 +8,82 @@ namespace Weixin.Service.Entities
 {
     public class BaseConfig:BaseEntity
     {
-        public string WeixinName { get; set; } //公众号名称
-        public string Appid { get; set; }
-        public string Token { get; set; }
-        public string EncodingAESKey { get; set; }
-        public string Appsecret { get; set; }
-        public string DefaultResponse { get; set; } //默认回复消息
+        private string weixinName;
+        public string WeixinName
+        {
+            get { return weixinName; }
+            set
+            {
+                if (value!=null)
+                {
+                    weixinName = value.Trim();
+                }
+            }
+        }
+
+        private string appid;
+        public string Appid
+        {
+            get { return appid; }
+            set
+            {
+                if (value!=null)
+                {
+                    appid = value.Trim();
+                }
+            }
+        }
+
+        private string token;
+        public string Token
+        {
+            get { return token; }
+            set
+            {
+                if (value!=null)
+                {
+                    token = value.Trim();
+                }
+            }
+        }
+
+        private string encodingAESKey;
+        public string EncodingAESKey
+        {
+            get { return encodingAESKey; }
+            set
+            {
+                if (value!=null)
+                {
+                    encodingAESKey = value.Trim();
+                }
+            }
+        }
+
+        private string appsecret;
+        public string Appsecret
+        {
+            get { return appsecret; }
+            set
+            {
+                if (value!=null)
+                {
+                    appsecret = value.Trim();
+                }
+            }
+        }
+
+        private string defaultResponse;
+        public string DefaultResponse
+        {
+            get { return defaultResponse; }
+            set
+            {
+                if (value!=null)
+                {
+                    defaultResponse = value.Trim();
+                }
+            }
+        }
     }
 }

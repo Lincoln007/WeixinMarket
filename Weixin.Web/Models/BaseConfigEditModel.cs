@@ -2,22 +2,17 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace Weixin.DTO
+namespace Weixin.Web.Models
 {
-    public class BaseConfigDTO
+    public class BaseConfigEditModel
     {
         public long Id { get; set; }
-
         [Display(Name = "公众号名称")]
-        public string WeixinName { get; set; }
-
-        public string Appid { get; set; }
-
+        public string WeixinName { get; set; } //公众号名称
+        //public string Appid { get; set; } //这个不能修改
         public string Token { get; set; }
-
         public string EncodingAESKey { get; set; }
         public string Appsecret { get; set; }
 
