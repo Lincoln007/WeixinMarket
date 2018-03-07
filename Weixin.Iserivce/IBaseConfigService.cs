@@ -17,5 +17,6 @@ namespace Weixin.Iserivce
             string DefaultResponse);
         Task Edit(long id, string WeixinName, string Token, string EncodingAESKey, string Appsecret,
             string DefaultResponse);
+        Task Delete(long id);
     }
 }

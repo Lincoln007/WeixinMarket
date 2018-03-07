@@ -147,10 +147,10 @@
     <Content Include="Views\Shared\_footer.cshtml" />
     <Content Include="Views\Shared\_MainLayoutPage.cshtml" />
     <Content Include="Views\Config\Index.cshtml" />
-    <None Include="Properties\PublishProfiles\weixinmarket - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\weixinmarket - Web Deploy.pubxml" />
     <Content Include="Views\Config\Create.cshtml" />
     <Content Include="Views\Config\Edit.cshtml" />
+    <None Include="Properties\PublishProfiles\weixinmarket - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\weixinmarket - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

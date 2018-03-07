@@ -39,7 +39,7 @@ namespace Weixin.Web.Controllers
         {
             await BaseConfigService.Create(model.WeixinName, model.Appid, model.Token, model.EncodingAESKey,
                 model.Appsecret, model.DefaultResponse);
-            Senparc.Weixin.Threads.ThreadUtility.Register();
+            Senparc.Weixin.Threads.ThreadUtility.Register(); //创建公众号的同时进行AccessToken的注册
             Senparc.Weixin.MP.Containers.AccessTokenContainer.Register(model.Appid, model.Appsecret, model.WeixinName);
             return RedirectToAction("Index");
         }
@@ -63,6 +63,13 @@ namespace Weixin.Web.Controllers
         {
             await BaseConfigService.Edit(model.Id, model.WeixinName, model.Token, model.EncodingAESKey, model.Appsecret,
                 model.DefaultResponse);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Delete(long id)
+        {
+            await BaseConfigService.Delete(id);
             return RedirectToAction("Index");
         }
     }

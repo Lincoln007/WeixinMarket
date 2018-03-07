@@ -123,5 +123,20 @@ namespace Weixin.Service
                 return await db.BaseConfig.CountAsync(b => b.Appid == appid);
             }
         }
+
+        public async Task Delete(long id)
+        {
+            using (var db=new WeixinDbContext())
+            {
+                var commonService = new CommonService<BaseConfig>(db);
+                var config = await commonService.GetById(id);
+                if (config == null)
+                {
+                    throw new ArgumentNullException();
+                }
+                db.BaseConfig.Remove(config);
+                await db.SaveChangesAsync();
+            }
+        }
     }
 }

@@ -6,12 +6,12 @@ using Senparc.Weixin.MP.MessageHandlers;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml.Linq;
 using Senparc.Weixin.Entities.Request;
+using System.Text;
 
 namespace Weixin.Core
 {
-    public class MyMessageHandler: MessageHandler<MessageContext<IRequestMessageBase, IResponseMessageBase>>
+    public class MyMessageHandler : MessageHandler<MessageContext<IRequestMessageBase, IResponseMessageBase>>
     {
         PostModel postModel;
         string defaultResponse;
@@ -20,6 +20,7 @@ namespace Weixin.Core
         {
             this.postModel = postModel;
             this.defaultResponse = defaultResponse;
+            //Senparc.Weixin.Config.IsDebug = true;//开启日志记录状态
         }
         //public MyMessageHandler(Stream inputStream, PostModel postModel=null,int maxRecordCount=0,
         //    DeveloperInfo developerInfo = null) : base(inputStream, postModel, maxRecordCount, developerInfo)
@@ -38,25 +39,19 @@ namespace Weixin.Core
             var responseMessage = base.CreateResponseMessage<ResponseMessageText>();
             responseMessage.Content = defaultResponse;
             var handler = requestMessage.StartHandler(false)
-                .Keyword("a", () =>
+                .Regex("^找", () =>
                 {
-                    CurrentMessageContext.StorageData = "aaaa";
-                    responseMessage.Content = "你写入了缓存aaaa";
+                    BookHelper bookHelper = new BookHelper();
+                    var list = bookHelper.Search(requestMessage.Content.Replace("找",string.Empty));
+                    StringBuilder sb = new StringBuilder();
+                    foreach (var book in list)
+                    {
+                        sb.AppendLine("为您找到：" + book.Name);
+                        sb.AppendLine(book.Url);
+                    }
+                    responseMessage.Content = sb.ToString();
                     return responseMessage;
                 })
-                .Keyword("b", () =>
-                 {
-                     var temp = CurrentMessageContext.StorageData;
-                     if (temp != null)
-                     {
-                         responseMessage.Content = temp.ToString();
-                     }
-                     else
-                     {
-                         responseMessage.Content = "没有缓存";
-                     }
-                     return responseMessage;
-                 })
                  .Keyword("c", () =>
                  {
                      var responseMessageNews = base.CreateResponseMessage<ResponseMessageNews>();
@@ -71,15 +66,6 @@ namespace Weixin.Core
                      return responseMessageNews;
                  });
             return handler.ResponseMessage as IResponseMessageBase;
-            //if (requestMessage.Content=="a")
-            //{
-                
-            //}
-            //else if (requestMessage.Content=="b")
-            //{
-               
-            //}
-            //return responseMessage;
         }
 
         public override IResponseMessageBase OnEvent_ClickRequest(RequestMessageEvent_Click requestMessage)

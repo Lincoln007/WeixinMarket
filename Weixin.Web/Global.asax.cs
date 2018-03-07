@@ -34,10 +34,12 @@ namespace Weixin.Web
             var baseConfigService = new BaseConfigService();
             var task = baseConfigService.GetAll();
             var configs = task.Result;
-            foreach (var config in configs)
+            foreach (var config in configs) //应用程序初始化时注册所有accesstoken
             {
                 Senparc.Weixin.MP.Containers.AccessTokenContainer.Register(config.Appid, config.Appsecret, config.WeixinName);
             }
+
+            Senparc.Weixin.Config.IsDebug = true;//开启日志记录状态
         }
     }
 }
