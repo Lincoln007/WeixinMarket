@@ -8,14 +8,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Weixin.Core;
-using static Weixin.Core.BookHelper;
+using Weixin.Core.CommonHelper;
+using static Weixin.Core.CommonHelper.BookHelper;
+using System.IO;
+using Senparc.Weixin.MP.Entities.Request;
+using Senparc.Weixin.MP.MessageHandlers;
+using Senparc.Weixin.Context;
+using Senparc.Weixin.MP.Entities;
+using System.Reflection;
 
 namespace UnitTestProject
 {
     [TestClass]
     public class BookHelperTest
     {
-        [TestMethod]
         public void Search()
         {
             BookHelper bookHelper = new BookHelper();
@@ -48,5 +54,18 @@ namespace UnitTestProject
                 Console.WriteLine(book.Url);
             }
         }
+
+        [TestMethod]
+        public void Reflection()
+        {
+            Assembly assembly = Assembly.LoadFrom("Weixin.Core.dll");
+            Type t = assembly.GetType("Weixin.Core.BookMessageHandler");
+            Object[] constructParms = new object[] { new MemoryStream(), new PostModel(), string.Empty };
+            var messageHandler = Activator.CreateInstance(t, constructParms)
+                as MessageHandler<MessageContext<IRequestMessageBase, IResponseMessageBase>>;
+            messageHandler.Execute();//执行微信处理过程
+        }
     }
+
+    
 }

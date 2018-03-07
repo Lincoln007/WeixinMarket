@@ -8,14 +8,15 @@ using System.Collections.Generic;
 using System.IO;
 using Senparc.Weixin.Entities.Request;
 using System.Text;
+using Weixin.Core.CommonHelper;
 
 namespace Weixin.Core
 {
-    public class MyMessageHandler : MessageHandler<MessageContext<IRequestMessageBase, IResponseMessageBase>>
+    public class BookMessageHandler : MessageHandler<MessageContext<IRequestMessageBase, IResponseMessageBase>>
     {
         PostModel postModel;
         string defaultResponse;
-        public MyMessageHandler(Stream inputStream, PostModel postModel, string defaultResponse)
+        public BookMessageHandler(Stream inputStream, PostModel postModel, string defaultResponse)
             : base(inputStream, postModel)
         {
             this.postModel = postModel;

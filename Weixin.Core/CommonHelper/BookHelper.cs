@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Weixin.Core
+namespace Weixin.Core.CommonHelper
 {
     public class BookHelper
     {
