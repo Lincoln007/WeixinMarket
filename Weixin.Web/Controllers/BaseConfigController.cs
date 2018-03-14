@@ -10,7 +10,7 @@ using Weixin.Web.Models;
 
 namespace Weixin.Web.Controllers
 {
-    public class ConfigController : Controller
+    public class BaseConfigController : Controller
     {
         public IBaseConfigService BaseConfigService { get; set; }
         public async Task<ActionResult> Index()
@@ -35,9 +35,9 @@ namespace Weixin.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(BaseConfigCreateModel model)
+        public ActionResult Create(BaseConfigCreateModel model)
         {
-            await BaseConfigService.Create(model.WeixinName, model.Appid, model.Token, model.EncodingAESKey,
+            var id = BaseConfigService.AddNew(model.WeixinName, model.Appid, model.Token, model.EncodingAESKey,
                 model.Appsecret, model.DefaultResponse);
             Senparc.Weixin.Threads.ThreadUtility.Register(); //创建公众号的同时进行AccessToken的注册
             Senparc.Weixin.MP.Containers.AccessTokenContainer.Register(model.Appid, model.Appsecret, model.WeixinName);

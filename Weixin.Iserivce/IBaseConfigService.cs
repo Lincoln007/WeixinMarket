@@ -9,14 +9,13 @@ namespace Weixin.Iserivce
 {
     public interface IBaseConfigService:IserviceSupport
     {
-        long AddNew(string WeixinName, string Appid, string Token, string EncodingAESKey, string Appsecret);
+        Task<long> AddNew(string weixinName, string appid, string token, string encodingAESKey, string appsecret,
+            string defaultResponse);
         Task<BaseConfigDTO> GetById(long id);
         Task<BaseConfigDTO[]> GetAll();
         Task<int> GetByAppid(string appid);
-        Task Create(string WeixinName, string Appid, string Token, string EncodingAESKey, string Appsecret,
-            string DefaultResponse);
-        Task Edit(long id, string WeixinName, string Token, string EncodingAESKey, string Appsecret,
-            string DefaultResponse);
+        Task Edit(long id, string weixinName, string token, string encodingAESKey, string appsecret,
+            string defaultResponse);
         Task Delete(long id);
     }
 }

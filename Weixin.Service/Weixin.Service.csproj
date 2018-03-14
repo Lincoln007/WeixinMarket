@@ -31,10 +31,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -53,13 +53,25 @@
     <Compile Include="CommonService.cs" />
     <Compile Include="Entities\BaseConfig.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\HandlerConfig.cs" />
+    <Compile Include="Entities\Permission.cs" />
+    <Compile Include="Entities\Role.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="HandlerConfigService.cs" />
     <Compile Include="Migrations\201802070649558_InitialCreate.cs" />
     <Compile Include="Migrations\201802070649558_InitialCreate.Designer.cs">
       <DependentUpon>201802070649558_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfig\BaseConfigConfig.cs" />
+    <Compile Include="ModelConfig\HandleConfigConfig.cs" />
+    <Compile Include="ModelConfig\PermissionConfig.cs" />
+    <Compile Include="ModelConfig\RoleConfig.cs" />
+    <Compile Include="ModelConfig\UserConfig.cs" />
+    <Compile Include="PermissionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleService.cs" />
+    <Compile Include="UserService.cs" />
     <Compile Include="WeixinDbContext.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +79,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Weixin.Core\Weixin.Core.csproj">
+      <Project>{2416ad5a-ba61-4d7a-b98b-b41a5fb95ad3}</Project>
+      <Name>Weixin.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Weixin.DTO\Weixin.DTO.csproj">
       <Project>{50a1ca2d-077c-4dce-9240-2c8d9043f97d}</Project>
       <Name>Weixin.DTO</Name>

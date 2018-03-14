@@ -13,6 +13,7 @@ namespace Weixin.Service.ModelConfig
         public BaseConfigConfig()
         {
             ToTable("T_BaseConfig");
+            HasRequired(b => b.User).WithRequiredDependent();
             Property(b => b.WeixinName).HasMaxLength(50).IsRequired();
             Property(b => b.Appid).HasMaxLength(50).IsRequired();
             Property(b => b.Token).HasMaxLength(50).IsRequired();

@@ -12,7 +12,8 @@ namespace Weixin.Service
 {
     public class BaseConfigService : IBaseConfigService
     {
-        public long AddNew(string weixinName, string appid, string token, string encodingAESKey, string appsecret)
+        public async Task<long> AddNew(string weixinName, string appid, string token, string encodingAESKey, string appsecret,
+            string defaultResponse)
         {          
             using (var db=new WeixinDbContext())
             {
@@ -23,15 +24,16 @@ namespace Weixin.Service
                     Appid = appid,
                     Token = token,
                     EncodingAESKey = encodingAESKey,
-                    Appsecret = appsecret
+                    Appsecret = appsecret,
+                    DefaultResponse=defaultResponse
                 };
-                var exists = service.GetAll().Any(a => a.Appid == appid);
+                var exists = await service.GetAll().AnyAsync(a => a.Appid == appid);
                 if (exists)
                 {
                     throw new ArgumentException("该公众号appid已经存在");
                 }
                 db.BaseConfig.Add(config);
-                db.SaveChanges();
+                await db.SaveChangesAsync();
                 return config.Id;
             }
         }
@@ -70,34 +72,8 @@ namespace Weixin.Service
             }
         }
 
-        public async Task Create(string WeixinName,string Appid,string Token,string EncodingAESKey,string Appsecret,
-            string DefaultResponse)
-        {
-            using (var db=new WeixinDbContext())
-            {
-                int count = await GetByAppid(Appid);
-                if (count>0) //说明已经存在该appid
-                {
-                    throw new ArgumentException("该公众号已经存在！");
-                }
-                else
-                {
-                    var config = new BaseConfig()
-                    {
-                        WeixinName = WeixinName,
-                        Appid = Appid,
-                        Token = Token,
-                        EncodingAESKey = EncodingAESKey,
-                        Appsecret = Appsecret
-                    };
-                    db.BaseConfig.Add(config);
-                    await db.SaveChangesAsync();
-                }
-            }
-        }
-
-        public async Task Edit(long id,string WeixinName, string Token, string EncodingAESKey, string Appsecret,
-            string DefaultResponse)
+        public async Task Edit(long id,string weixinName, string token, string encodingAESKey, string appsecret,
+            string defaultResponse)
         {
             using (var db = new WeixinDbContext())
             {
@@ -107,11 +83,11 @@ namespace Weixin.Service
                 {
                     throw new ArgumentNullException();
                 }
-                config.WeixinName = WeixinName;
-                config.Token = Token;
-                config.EncodingAESKey = EncodingAESKey;
-                config.Appsecret = Appsecret;
-                config.DefaultResponse = DefaultResponse;
+                config.WeixinName = weixinName;
+                config.Token = token;
+                config.EncodingAESKey = encodingAESKey;
+                config.Appsecret = appsecret;
+                config.DefaultResponse = defaultResponse;
                 await db.SaveChangesAsync();
             }
         }

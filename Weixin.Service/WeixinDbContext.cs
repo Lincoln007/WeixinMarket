@@ -25,5 +25,9 @@
             modelBuilder.Configurations.AddFromAssembly(Assembly.GetExecutingAssembly());
         }
         public DbSet<BaseConfig> BaseConfig { get; set; }
+        public DbSet<HandlerConfig> HandlerConfig { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<Role> Role { get; set; }
+        public DbSet<Permission> Permission { get; set; }
     }
 }

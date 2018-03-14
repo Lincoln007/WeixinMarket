@@ -41,7 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IBaseConfigService.cs" />
+    <Compile Include="IHandlerConfigService.cs" />
+    <Compile Include="IPermissionService.cs" />
+    <Compile Include="IRoleService.cs" />
     <Compile Include="IserviceSupport.cs" />
+    <Compile Include="IUserService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

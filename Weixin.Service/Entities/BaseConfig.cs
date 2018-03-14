@@ -85,5 +85,7 @@ namespace Weixin.Service.Entities
                 }
             }
         }
+
+        public virtual User User { get; set; }
     }
 }

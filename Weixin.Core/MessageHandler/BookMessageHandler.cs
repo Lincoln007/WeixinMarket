@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using Senparc.Weixin.Entities.Request;
 using System.Text;
-using Weixin.Core.CommonHelper;
+using Weixin.Core.Helper;
 
 namespace Weixin.Core
 {

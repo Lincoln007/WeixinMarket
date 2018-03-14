@@ -55,7 +55,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommonHelper\BookHelper.cs" />
+    <Compile Include="Helper\BookHelper.cs" />
+    <Compile Include="Helper\CommonHelper.cs" />
     <Compile Include="MessageHandler\BookMessageHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
