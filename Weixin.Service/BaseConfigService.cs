@@ -12,12 +12,17 @@ namespace Weixin.Service
 {
     public class BaseConfigService : IBaseConfigService
     {
-        public async Task<long> AddNew(string weixinName, string appid, string token, string encodingAESKey, string appsecret,
-            string defaultResponse)
+        public async Task<long> AddNew(string weixinName, string appid, string token, string encodingAESKey,
+            string appsecret,string defaultResponse)
         {          
             using (var db=new WeixinDbContext())
             {
                 CommonService<BaseConfig> service = new CommonService<BaseConfig>(db);
+                var exists = await service.GetAll().AnyAsync(a => a.Appid == appid);
+                if (exists)
+                {
+                    throw new ArgumentException("该公众号appid已经存在");
+                }
                 var config = new BaseConfig()
                 {
                     WeixinName = weixinName,
@@ -26,12 +31,7 @@ namespace Weixin.Service
                     EncodingAESKey = encodingAESKey,
                     Appsecret = appsecret,
                     DefaultResponse=defaultResponse
-                };
-                var exists = await service.GetAll().AnyAsync(a => a.Appid == appid);
-                if (exists)
-                {
-                    throw new ArgumentException("该公众号appid已经存在");
-                }
+                };               
                 db.BaseConfig.Add(config);
                 await db.SaveChangesAsync();
                 return config.Id;
@@ -81,7 +81,7 @@ namespace Weixin.Service
                 var config = await commonService.GetById(id);
                 if (config==null)
                 {
-                    throw new ArgumentNullException();
+                    throw new ArgumentNullException("公众号不存在");
                 }
                 config.WeixinName = weixinName;
                 config.Token = token;
@@ -92,11 +92,12 @@ namespace Weixin.Service
             }
         }
 
-        public async Task<int> GetByAppid(string appid)
+        public async Task<BaseConfigDTO> GetByAppid(string appid)
         {
-            using (var db=new WeixinDbContext())
+            using (var db = new WeixinDbContext())
             {
-                return await db.BaseConfig.CountAsync(b => b.Appid == appid);
+                var entity = await db.BaseConfig.SingleOrDefaultAsync(b => b.Appid == appid);
+                return ToDTO(entity);
             }
         }
 
@@ -112,6 +113,17 @@ namespace Weixin.Service
                 }
                 db.BaseConfig.Remove(config);
                 await db.SaveChangesAsync();
+            }
+        }
+
+        public async Task<BaseConfigDTO[]> GetByName(string weixinName)
+        {
+            using (var db = new WeixinDbContext())
+            {
+                CommonService<BaseConfig> service = new CommonService<BaseConfig>(db);
+                var entity = service.GetAll().Where(b => b.WeixinName.Contains(weixinName));
+                var list = await entity.ToListAsync();
+                return list.Select(b => ToDTO(b)).ToArray();
             }
         }
     }

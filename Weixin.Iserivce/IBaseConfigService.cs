@@ -13,9 +13,10 @@ namespace Weixin.Iserivce
             string defaultResponse);
         Task<BaseConfigDTO> GetById(long id);
         Task<BaseConfigDTO[]> GetAll();
-        Task<int> GetByAppid(string appid);
+        Task<BaseConfigDTO> GetByAppid(string appid);
         Task Edit(long id, string weixinName, string token, string encodingAESKey, string appsecret,
             string defaultResponse);
         Task Delete(long id);
+        Task<BaseConfigDTO[]> GetByName(string weixinName);
     }
 }

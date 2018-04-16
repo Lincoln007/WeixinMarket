@@ -19,6 +19,7 @@ namespace Weixin.Service
                 var role = new Role() { RoleName = roleName };
                 db.Role.Add(role);
                 await db.SaveChangesAsync();
+                return role.Id;
             }
         }
 
@@ -113,17 +114,22 @@ namespace Weixin.Service
             {
                 CommonService<Role> commonService = new CommonService<Role>(db);
                 var role = await commonService.GetById(roleId);
+                if (role==null)
+                {
+                    throw new ArgumentException("角色未找到");
+                }
                 return ToDTO(role);
             }
         }
 
-        public async Task<RoleDTO> GetByName(string roleName)
+        public async Task<RoleDTO[]> GetByName(string roleName)
         {
             using (var db = new WeixinDbContext())
             {
                 CommonService<Role> commonService = new CommonService<Role>(db);
-                var role = await commonService.GetAll().SingleOrDefaultAsync(r => r.RoleName == roleName);
-                return ToDTO(role);
+                var roles = commonService.GetAll().Where(r => r.RoleName.Contains(roleName));
+                var list = await roles.ToListAsync();
+                return list.Select(r => ToDTO(r)).ToArray();
             }
         }
 

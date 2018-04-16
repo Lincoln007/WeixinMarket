@@ -29,5 +29,11 @@
         public DbSet<User> User { get; set; }
         public DbSet<Role> Role { get; set; }
         public DbSet<Permission> Permission { get; set; }
+        public DbSet<ParentMenuConfig> ParentMenuConfig { get; set; }
+        public DbSet<SubMenuConfig> SubMenuConfig { get; set; }
+
+        public System.Data.Entity.DbSet<Weixin.DTO.PermissionDTO> PermissionDTOes { get; set; }
+
+        public System.Data.Entity.DbSet<Weixin.DTO.RoleDTO> RoleDTOes { get; set; }
     }
 }

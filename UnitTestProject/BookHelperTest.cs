@@ -8,8 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Weixin.Core;
-using Weixin.Core.CommonHelper;
-using static Weixin.Core.CommonHelper.BookHelper;
+using Weixin.Core.Helper;
+using static Weixin.Core.Helper.BookHelper;
 using System.IO;
 using Senparc.Weixin.MP.Entities.Request;
 using Senparc.Weixin.MP.MessageHandlers;
@@ -55,7 +55,6 @@ namespace UnitTestProject
             }
         }
 
-        [TestMethod]
         public void Reflection()
         {
             Assembly assembly = Assembly.LoadFrom("Weixin.Core.dll");

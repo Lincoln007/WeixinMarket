@@ -111,6 +111,7 @@ namespace Weixin.Service
         {
             PermissionDTO dto = new PermissionDTO()
             {
+                Id=entity.Id,
                 PermissionName = entity.PermissionName,
                 Description = entity.Description
             };
@@ -137,12 +138,14 @@ namespace Weixin.Service
             }
         }
 
-        public async Task<PermissionDTO> GetByName(string permissionName)
+        public async Task<PermissionDTO[]> GetByName(string permissionName)
         {
             using (var db = new WeixinDbContext())
             {
-                var perm = await db.Permission.SingleOrDefaultAsync(p => p.PermissionName == permissionName);
-                return perm == null ? null : ToDTO(perm);
+                CommonService<Permission> commonService = new CommonService<Permission>(db);
+                var perms = commonService.GetAll().Where(r => r.PermissionName.Contains(permissionName));
+                var list = await perms.ToListAsync();
+                return list.Select(p => ToDTO(p)).ToArray();
             }
         }
 

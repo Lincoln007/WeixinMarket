@@ -13,7 +13,7 @@ namespace Weixin.Iserivce
         Task Edit(long roleId, string roleName);
         Task Delete(long roleId);
         Task<RoleDTO> GetById(long roleId);
-        Task<RoleDTO> GetByName(string roleName);
+        Task<RoleDTO[]> GetByName(string roleName);
         Task<RoleDTO[]> GetAll();
 
         Task AddRoleIds(long userId, long[] roleIds); //给用户增加角色

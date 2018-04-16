@@ -16,6 +16,6 @@ namespace Weixin.Iserivce
         Task<UserDTO> GetByPhoneNum(string phoneNum);
         Task<bool> CheckLogin(String userName, String password);
         Task Delete(long userId);
-        Task<bool> HasPermission(long userId, String permissionName);
+        bool HasPermission(long userId, String permissionName);
     }
 }

@@ -40,32 +40,19 @@ namespace Weixin.Core
             var responseMessage = base.CreateResponseMessage<ResponseMessageText>();
             responseMessage.Content = defaultResponse;
             var handler = requestMessage.StartHandler(false)
-                .Regex("^找", () =>
+                .Default(() =>
                 {
                     BookHelper bookHelper = new BookHelper();
-                    var list = bookHelper.Search(requestMessage.Content.Replace("找",string.Empty));
+                    var list = bookHelper.Search(requestMessage.Content.Replace("找", string.Empty));
                     StringBuilder sb = new StringBuilder();
                     foreach (var book in list)
                     {
-                        sb.AppendLine("为您找到：" + book.Name);
+                        sb.AppendLine(book.Name);
                         sb.AppendLine(book.Url);
                     }
                     responseMessage.Content = sb.ToString();
                     return responseMessage;
-                })
-                 .Keyword("c", () =>
-                 {
-                     var responseMessageNews = base.CreateResponseMessage<ResponseMessageNews>();
-                     var news = new Article()
-                     {
-                         Title = "一路繁花相送",
-                         Description = "一路繁花相送简介",
-                         PicUrl = "https://wx2.sinaimg.cn/mw690/ab72f980gy1fobpytwswvj20d60kytj8.jpg",
-                         Url = "https://m.weibo.cn/u/2876438912?jumpfrom=weibocom"
-                     };
-                     responseMessageNews.Articles.Add(news);
-                     return responseMessageNews;
-                 });
+                });
             return handler.ResponseMessage as IResponseMessageBase;
         }
 

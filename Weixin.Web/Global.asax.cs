@@ -9,7 +9,8 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Weixin.Iserivce;
 using Weixin.Service;
-using Weixin.Core;
+using Weixin.Core.Helper;
+using Weixin.Web.App_Start;
 
 namespace Weixin.Web
 {
@@ -34,15 +35,16 @@ namespace Weixin.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
 
             Senparc.Weixin.Threads.ThreadUtility.Register();
-            var baseConfigService = new BaseConfigService();
-            var task = baseConfigService.GetAll();
-            var configs = task.Result;
+
+            //MvcApplication不是autofac创建，所以不会自动属性注入
+            var baseConfigService = (IBaseConfigService)DependencyResolver.Current.GetService(typeof(IBaseConfigService));
+            var configs = baseConfigService.GetAll().Result;
             foreach (var config in configs) //应用程序初始化时注册所有accesstoken
             {
                 Senparc.Weixin.MP.Containers.AccessTokenContainer.Register(config.Appid, config.Appsecret, config.WeixinName);
             }
-
             Senparc.Weixin.Config.IsDebug = true;//开启日志记录状态
+            FilterConfig.RegisterFilters(GlobalFilters.Filters);
         }
     }
 }

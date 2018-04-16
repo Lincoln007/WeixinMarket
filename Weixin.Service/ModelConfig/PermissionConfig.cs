@@ -13,7 +13,7 @@ namespace Weixin.Service.ModelConfig
         public PermissionConfig()
         {
             ToTable("T_Permissions");
-            Property(p => p.Name).HasMaxLength(50).IsRequired();
+            Property(p => p.PermissionName).HasMaxLength(50).IsRequired();
             Property(p => p.Description).IsOptional();
         }
     }

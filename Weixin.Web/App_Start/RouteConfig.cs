@@ -13,6 +13,12 @@ namespace Weixin.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //routes.MapRoute(
+            //    name: "Delete",
+            //    url: "{controller}/{action}/{id}-{referrer}",
+            //    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional, referrer=UrlParameter.Optional }
+            //);
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

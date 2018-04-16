@@ -105,13 +105,13 @@ namespace Weixin.Service
             }
         }
 
-        public async Task<bool> HasPermission(long userId, string permissionName)
+        public bool HasPermission(long userId, string permissionName)
         {
             using (var db=new WeixinDbContext())
             {
                 CommonService<User> commonService = new CommonService<User>(db);
-                var user = await commonService.GetAll().Include(u => u.Roles).
-                    AsNoTracking().SingleOrDefaultAsync(u => u.Id == userId);
+                var user = commonService.GetAll().Include(u => u.Roles).
+                    AsNoTracking().SingleOrDefault(u => u.Id == userId);
                 if (user == null)
                 {
                     throw new ArgumentException("找不到id=" + userId + "的用户");
@@ -120,7 +120,8 @@ namespace Weixin.Service
                   Roles.SelectMany(r => r.Permissions)就是遍历Roles的每一个Role
                   然后把每个Role的Permissions放到一个集合中*/
                 var permissions = user.Roles.SelectMany(r => r.Permissions);
-                return permissions.Any(p => p.Name == permissionName);
+                //有任何一个权限匹配，就返回true
+                return permissions.Any(p => p.PermissionName == permissionName);
             }
         }
 

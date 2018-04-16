@@ -17,6 +17,8 @@ using Weixin.Service.Entities;
 using Senparc.Weixin.Context;
 using Senparc.Weixin.MP.Entities;
 using System.Reflection;
+using Senparc.Weixin.MP.Containers;
+using Senparc.Weixin.MP.Entities.Menu;
 
 namespace Weixin.Web.Controllers
 {
@@ -70,5 +72,67 @@ namespace Weixin.Web.Controllers
             messageHandler.Execute();//执行微信处理过程
             return new FixWeixinBugWeixinResult(messageHandler);//返回结果
         }
+
+        //public async Task<ContentResult> CreateMenu()
+        //{
+        //    string id = string.IsNullOrEmpty(Request["id"]) ? "1" : Request["id"];
+        //    var config = await BaseConfigService.GetById(long.Parse(id));
+        //    var accessToken = await AccessTokenContainer.TryGetAccessTokenAsync(config.Appid,config.Appsecret);
+        //    string msg = string.Empty;
+        //    ButtonGroup bg = new ButtonGroup();
+        //    List<SubMenuConfig> list = await BaseHandler.GetMenuConfig(id);
+        //    if (list.Count > 0)
+        //    {
+        //        foreach (var item in list.Where(l => l.Class == 0)) //所有一级菜单
+        //        {
+        //            if (item.Type == "click") //添加所有单击菜单
+        //            {
+        //                bg.button.Add(new SingleClickButton()
+        //                {
+        //                    name = item.MenuName,
+        //                    key = item.MenuKey
+        //                });
+        //            }
+        //            else if (item.Type == "view") //添加所有视图菜单
+        //            {
+        //                bg.button.Add(new SingleViewButton()
+        //                {
+        //                    name = item.MenuName,
+        //                    url = item.Url
+        //                });
+        //            }
+        //            else if (item.Type == "parent") //含有子菜单的父级菜单
+        //            {
+        //                var subButton = new SubButton()
+        //                {
+        //                    name = item.MenuName
+        //                };
+        //                var subList = list.Where(l => l.ParentMenuID == item.MenuID); //找出该父菜单下的所有子菜单
+        //                foreach (var subItem in subList)
+        //                {
+        //                    if (subItem.Type == "click") //添加所有单击菜单
+        //                    {
+        //                        subButton.sub_button.Add(new SingleClickButton()
+        //                        {
+        //                            name = subItem.MenuName,
+        //                            key = subItem.MenuKey
+        //                        });
+        //                    }
+        //                    else if (subItem.Type == "view") //添加所有视图菜单
+        //                    {
+        //                        subButton.sub_button.Add(new SingleViewButton()
+        //                        {
+        //                            name = subItem.MenuName,
+        //                            url = subItem.Url
+        //                        });
+        //                    }
+        //                }
+        //                bg.button.Add(subButton);
+        //            }
+        //        }
+        //    }
+        //    var result = CommonApi.CreateMenu(accessToken, bg);
+        //    return Content(result.errmsg);
+        //}
     }
 }

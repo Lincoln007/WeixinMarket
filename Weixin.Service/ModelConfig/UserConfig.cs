@@ -12,7 +12,7 @@ namespace Weixin.Service.ModelConfig
     {
         public UserConfig()
         {
-            ToTable("T_UserConfig");
+            ToTable("T_User");
             HasMany(u => u.Roles).WithMany(r => r.Users)
                 .Map(m => m.ToTable("T_UserRole").MapLeftKey("UserId").MapRightKey("RoleId"));
             Property(u => u.UserName).HasMaxLength(50).IsRequired();

@@ -1,12 +1,12 @@
 ﻿@model IEnumerable<Weixin.DTO.BaseConfigDTO>
 
 @{
-    ViewBag.Title = "Base";
+    ViewBag.Title = "公众号配置";
     Layout = "~/Views/Shared/_MainLayoutPage.cshtml";
 }
 <hr />
 <p>
-    <a href="/Config/Create" class="btn btn-success">新增</a>
+    <a href="/BaseConfig/Create" class="btn btn-success">新增</a>
 </p>
 <table class="table table-hover table-bordered">
     <thead>
@@ -55,11 +55,8 @@
                 @Html.DisplayFor(modelItem => item.DefaultResponse)
             </td>
             <td>
-                <a href="/Config/Edit/@item.Id" class="btn btn-primary">编辑</a>
-                <form action="Delete" method="post">
-                    <input type="hidden" name="Id" value="@item.Id" />
-                    <input type="submit"  value="删除" class="btn btn-danger"/>
-                </form>
+                <a href="/BaseConfig/Edit/@item.Id" class="btn btn-primary">编辑</a>
+                <a href="/BaseConfig/Delete/@item.Id" class="btn btn-danger">删除</a>
             </td>
         </tr>
 }

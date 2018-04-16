@@ -54,6 +54,8 @@
     <Compile Include="Entities\BaseConfig.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
     <Compile Include="Entities\HandlerConfig.cs" />
+    <Compile Include="Entities\ParentMenuConfig.cs" />
+    <Compile Include="Entities\SubMenuConfig.cs" />
     <Compile Include="Entities\Permission.cs" />
     <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\User.cs" />
@@ -62,15 +64,31 @@
     <Compile Include="Migrations\201802070649558_InitialCreate.Designer.cs">
       <DependentUpon>201802070649558_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803141551503_AddFewModels.cs" />
+    <Compile Include="Migrations\201803141551503_AddFewModels.Designer.cs">
+      <DependentUpon>201803141551503_AddFewModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803141601009_UpdateUser.cs" />
+    <Compile Include="Migrations\201803141601009_UpdateUser.Designer.cs">
+      <DependentUpon>201803141601009_UpdateUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803210307173_AddMenuConfigs.cs" />
+    <Compile Include="Migrations\201803210307173_AddMenuConfigs.Designer.cs">
+      <DependentUpon>201803210307173_AddMenuConfigs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ModelConfig\BaseConfigConfig.cs" />
     <Compile Include="ModelConfig\HandleConfigConfig.cs" />
+    <Compile Include="ModelConfig\ParentMenuConfigConfig.cs" />
     <Compile Include="ModelConfig\PermissionConfig.cs" />
     <Compile Include="ModelConfig\RoleConfig.cs" />
+    <Compile Include="ModelConfig\SubMenuConfigConfig.cs" />
     <Compile Include="ModelConfig\UserConfig.cs" />
+    <Compile Include="ParentMenuConfigService.cs" />
     <Compile Include="PermissionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleService.cs" />
+    <Compile Include="SubMenuConfigService.cs" />
     <Compile Include="UserService.cs" />
     <Compile Include="WeixinDbContext.cs" />
   </ItemGroup>
@@ -95,6 +113,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201802070649558_InitialCreate.resx">
       <DependentUpon>201802070649558_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803141551503_AddFewModels.resx">
+      <DependentUpon>201803141551503_AddFewModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803141601009_UpdateUser.resx">
+      <DependentUpon>201803141601009_UpdateUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803210307173_AddMenuConfigs.resx">
+      <DependentUpon>201803210307173_AddMenuConfigs.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

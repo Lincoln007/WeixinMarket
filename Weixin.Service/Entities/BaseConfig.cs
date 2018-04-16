@@ -87,5 +87,6 @@ namespace Weixin.Service.Entities
         }
 
         public virtual User User { get; set; }
+        public virtual ICollection<ParentMenuConfig> ParentMenuConfigs { get; set; } = new List<ParentMenuConfig>();
     }
 }
